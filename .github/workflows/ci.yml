@@ -43,3 +43,10 @@ jobs:
         run: pip install ansible-lint
       - name: Run Ansible Lint
         run: ansible-lint ansible_iac/setup_env.yml
+  compose-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Validate Compose file
+        run: docker compose -f monitoring/docker-compose.yml config -q
